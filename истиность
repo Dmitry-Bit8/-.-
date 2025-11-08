@@ -1,0 +1,64 @@
+namespace TruthTables
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+            Console.WriteLine("Таблица истинности для операции И (AND):");
+            PrintTruthTable("AND", (a, b) => a && b);
+            Console.WriteLine();
+
+            
+            Console.WriteLine("Таблица истинности для операции ИЛИ (OR):");
+            PrintTruthTable("OR", (a, b) => a || b);
+            Console.WriteLine();
+
+           
+            Console.WriteLine("Таблица истинности для операции НЕ (NOT):");
+            PrintNotTruthTable(); 
+        }
+
+      
+        static void PrintTruthTable(string operationName, Func<bool, bool, bool> operation)
+        {
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine("| Операнд 1 | Операция | Операнд 2 | Результат |");
+            Console.WriteLine("------------------------------------------------");
+
+            
+            for (int i = 0; i < 2; i++)  
+            {
+                for (int j = 0; j < 2; j++) 
+                {
+                    bool operand1 = (i == 0); 
+                    bool operand2 = (j == 0);
+
+                    bool result = operation(operand1, operand2); 
+
+                   
+                    Console.WriteLine($"| {Convert.ToInt32(operand1),9} | {operationName,8} | {Convert.ToInt32(operand2),9} | {Convert.ToInt32(result),9} |");
+                }
+            }
+            Console.WriteLine("------------------------------------------------");
+        }
+
+        
+        static void PrintNotTruthTable()
+        {
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("| Операция | Операнд | Результат |");
+            Console.WriteLine("----------------------------------");
+
+            for (int i = 0; i < 2; i++)
+            {
+                bool operand = (i == 1);
+                bool result = !operand;
+
+                Console.WriteLine($"|    NOT   | {Convert.ToInt32(operand),7} | {Convert.ToInt32(result),7} |");
+            }
+            Console.WriteLine("--------------------------------");
+        }
+    }
+}
+
